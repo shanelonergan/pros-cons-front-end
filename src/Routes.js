@@ -1,6 +1,6 @@
 import React from 'react';
-import {Switch, Route} from ‘react-router-dom’
-import {Home, Login, SignUp} from './Components'
+import {Switch, Route} from 'react-router-dom'
+import { Home, Login, SignUp } from './components'
 
 const Routes = () => {
     return (
