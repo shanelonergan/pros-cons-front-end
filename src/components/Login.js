@@ -32,18 +32,26 @@ const Login = ({ login }) => {
             <FormField label="Name" name="name">
               <TextInput name="name" />
             </FormField>
-            <FormField label="Email" name="email" required>
-              <MaskedInput
-                name="email"
-                mask={[
-                  { regexp: /^[\w\-_.]+$/, placeholder: "example" },
-                  { fixed: "@" },
-                  { regexp: /^[\w]+$/, placeholder: "my" },
-                  { fixed: "." },
-                  { regexp: /^[\w]+$/, placeholder: "com" }
-                ]}
-              />
+            <FormField label='Password'>
+                <TextInput
+                    id='password-input'
+                    name='password'
+                    type='password'
+                    placeholder='Password'
+                />
             </FormField>
+            {/* <FormField>
+                <MaskedInput
+                    name="email"
+                    mask={[
+                    { regexp: /^[\w\-_.]+$/, placeholder: "example" },
+                    { fixed: "@" },
+                    { regexp: /^[\w]+$/, placeholder: "my" },
+                    { fixed: "." },
+                    { regexp: /^[\w]+$/, placeholder: "com" }
+                    ]}
+                />
+            </FormField> */}
 
             <Box direction="row" justify="between" margin={{ top: "medium" }}>
               <Button label="Sign Up" />
