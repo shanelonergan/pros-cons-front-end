@@ -36,8 +36,8 @@ const useUser = () => {
         prompt: {}
     }
 
-    const login = (userObj, slug) => {
-        fetch(`${API}/${slug.toLowerCase()}`, {
+    const login = (userObj) => {
+        fetch(`${API}/login`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

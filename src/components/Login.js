@@ -14,9 +14,7 @@ const Login = ({ login }) => {
 
     const handleSubmit = (event) => {
         event.preventDefault()
-        const slug = "login"
-        login(input, slug)
-        // setInput(input)
+        login(input)
     }
 
     return (
