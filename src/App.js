@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import useUser from './hooks/useUser'
-import Routes from './Routes'
-// import { Route, Switch, Link, Redirect } from 'react-router-dom'
+
+// => Grommet \\
 import {
     Grommet,
     Box,
@@ -15,11 +15,13 @@ import {
 } from 'grommet'
 import { Grommet as GrommetIcon, Home } from 'grommet-icons'
 
-import { NavBar } from './components'
-
-// ==> Themes \\
+// => Themes \\
 import { grommet, dark } from 'grommet/themes'
 import { dxc } from 'grommet-theme-dxc'
+
+// => Components \\
+import { NavBar } from './components'
+import Routes from './Routes'
 
 function App() {
     const [userState, userDispatch, login, getUserData, editUserBio] = useUser()
@@ -45,7 +47,9 @@ function App() {
                         <NavBar/>
                         <Main>
                             <Box fill align='center' justify='center'>
-                                <Routes />
+                                <Routes
+                                    login={login}
+                                />
                             </Box>
                         </Main>
                         <Footer background='light-4' pad='small' margin='small'>

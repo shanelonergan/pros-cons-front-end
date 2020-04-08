@@ -9,8 +9,15 @@ import {
   TextInput
 } from "grommet";
 
-const Login = () => {
+const Login = ({ login }) => {
     const [value, setValue] = useState()
+
+    const handleSubmit = (event) => {
+        event.preventDefault()
+        const slug = (type === "Login" ? "login" : "users")
+        login(draft, slug)
+        setDraft(initialDraft)
+    }
     return (
         <Box fill align="center" justify="center">
         <Box width="medium">

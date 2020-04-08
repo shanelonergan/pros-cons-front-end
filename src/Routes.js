@@ -2,15 +2,22 @@ import React from 'react';
 import {Switch, Route} from 'react-router-dom'
 import { Home, Login, SignUp } from './components'
 
-const Routes = () => {
+const renderLogin = () => {
     return (
-        <div>
-            <Switch>
-                <Route path="/signup" component={SignUp} />
-                <Route path="/login" component={Login} />
-                <Route exact path="/" component={Home} />
-            </Switch>
-        </div>
+        <Login
+            login={ login }
+        />
+    )
+}
+
+const Routes = ({ login }) => {
+
+    return (
+        <Switch>
+            <Route path="/signup" component={ SignUp } />
+            <Route path="/login" render={ renderLogin } />
+            <Route exact path="/" component={ Home } />
+        </Switch>
     );
 }
 
