@@ -1,4 +1,5 @@
 import {useReducer} from 'react'
+import API from '../config/API'
 
 const userReducer = (state, {type, payload}) => {
 
@@ -26,51 +27,51 @@ const userReducer = (state, {type, payload}) => {
         default:
             throw new Error("Undefined User Dispatch Action")
     }
+}
 
-    const useUser = () => {
-        const initialState = {
-            loggedInUserId: null,
-            token: "",
-            prompt: {}
-        }
-
-        const login = (userObj, slug) => {
-            fetch(`${API}/${slug.toLowerCase()}`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(userObj)
-            })
-            .then(res => res.json())
-            .then(authObj => {
-                if (authObj.errors) {
-                    console.log(authObj)
-                    dispatch({type: "ERROR", payload: authObj})
-                } else {
-                    window.history.pushState({urlPath:'/'}, "Home", "/")
-                    dispatch({type: "LOGIN", payload: authObj})
-                }
-            })
-        }
-
-        const getUserData = (userId, token) => {
-            if (userId) {
-            fetch(`${API}/users/${userId}`, {
-                headers: {"Authorization": token }
-            })
-            .then(res => res.json())
-            .then(userObj => dispatch({type: 'GET', payload: userObj}))
-            } else {
-                // render something
-                console.log("Nope")
-            }
-        }
-
-        const [state, dispatch] = useReducer(userReducer, initialState)
-
-        return [state, dispatch, login, getUserData]
+const useUser = () => {
+    const initialState = {
+        loggedInUserId: null,
+        token: "",
+        prompt: {}
     }
+
+    const login = (userObj, slug) => {
+        fetch(`${API}/${slug.toLowerCase()}`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(userObj)
+        })
+        .then(res => res.json())
+        .then(authObj => {
+            if (authObj.errors) {
+                console.log(authObj)
+                dispatch({type: "ERROR", payload: authObj})
+            } else {
+                window.history.pushState({urlPath:'/'}, "Home", "/")
+                dispatch({type: "LOGIN", payload: authObj})
+            }
+        })
+    }
+
+    const getUserData = (userId, token) => {
+        if (userId) {
+        fetch(`${API}/users/${userId}`, {
+            headers: {"Authorization": token }
+        })
+        .then(res => res.json())
+        .then(userObj => dispatch({type: 'GET', payload: userObj}))
+        } else {
+            // render something
+            console.log("Nope")
+        }
+    }
+
+    const [state, dispatch] = useReducer(userReducer, initialState)
+
+    return [state, dispatch, login, getUserData]
 }
 
 export default useUser
