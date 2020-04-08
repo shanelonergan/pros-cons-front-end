@@ -2,15 +2,10 @@ import React, { useState } from 'react';
 import {
   Box,
   Button,
-  CheckBox,
   Grommet,
   Form,
   FormField,
   MaskedInput,
-  RadioButtonGroup,
-  RangeInput,
-  Select,
-  TextArea,
   TextInput
 } from "grommet";
 
@@ -42,9 +37,8 @@ const Login = () => {
             </FormField>
 
             <Box direction="row" justify="between" margin={{ top: "medium" }}>
-              <Button label="Cancel" />
-              <Button type="reset" label="Reset" />
-              <Button type="submit" label="Update" primary />
+              <Button label="Sign Up" />
+              <Button type="submit" label="Log In" primary />
             </Box>
           </Form>
         </Box>

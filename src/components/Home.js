@@ -12,7 +12,7 @@ const Home = () => {
 
     return (
         <Box align="center" pad="medium">
-            <Button label="Default" onClick={ handleLogin } />
+            <Button label="Log In" onClick={ handleLogin } />
         </Box>
     );
 }
