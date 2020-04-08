@@ -1,10 +1,19 @@
 import React from 'react';
+import { Box, Button, Grommet } from "grommet";
+import { Redirect } from 'react-router-dom'
+import { useHistory } from 'react-router-dom';
 
 const Home = () => {
-    return (
-        <div>
+    let history = useHistory();
 
-        </div>
+    const handleLogin = () => {
+        history.push('/login');
+    };
+
+    return (
+        <Box align="center" pad="medium">
+            <Button label="Default" onClick={ handleLogin } />
+        </Box>
     );
 }
 
