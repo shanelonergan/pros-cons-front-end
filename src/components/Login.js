@@ -10,21 +10,21 @@ import {
 } from "grommet";
 
 const Login = ({ login }) => {
-    const [value, setValue] = useState()
+    const [input, setInput] = useState()
 
-    const handleSubmit = (event) => {
-        event.preventDefault()
-        const slug = (type === "Login" ? "login" : "users")
-        login(draft, slug)
-        setDraft(initialDraft)
-    }
+    // const handleSubmit = (event) => {
+    //     event.preventDefault()
+    //     const slug = (type === "Login" ? "login" : "users")
+    //     login(draft, slug)
+    //     setDraft(initialDraft)
+    // }
     return (
         <Box fill align="center" justify="center">
         <Box width="medium">
           <Form
-            value={value}
-            onChange={nextValue => setValue(nextValue)}
-            onReset={() => setValue({})}
+            input={input}
+            onChange={nextInput => setInput(nextInput)}
+            onReset={() => setInput({})}
             onSubmit={event => console.log("Submit", event.value)}
           >
             <FormField label="Name" name="name">
