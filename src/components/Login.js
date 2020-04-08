@@ -12,12 +12,13 @@ import {
 const Login = ({ login }) => {
     const [input, setInput] = useState()
 
-    // const handleSubmit = (event) => {
-    //     event.preventDefault()
-    //     const slug = (type === "Login" ? "login" : "users")
-    //     login(draft, slug)
-    //     setDraft(initialDraft)
-    // }
+    const handleSubmit = (event) => {
+        event.preventDefault()
+        const slug = "login"
+        login(input, slug)
+        // setInput(input)
+    }
+
     return (
         <Box fill align="center" justify="center">
         <Box width="medium">
@@ -25,7 +26,10 @@ const Login = ({ login }) => {
             input={input}
             onChange={nextInput => setInput(nextInput)}
             onReset={() => setInput({})}
-            onSubmit={event => console.log("Submit", event.value)}
+            onSubmit={event => {
+                console.log("Submit", event.value)
+                handleSubmit(event)
+            }}
           >
             <FormField label="Name" name="name">
               <TextInput name="name" />
