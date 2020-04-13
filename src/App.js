@@ -8,12 +8,9 @@ import {
     ResponsiveContext,
     Footer,
     Text,
-    Header,
-    Button,
-    Menu,
     Main,
 } from 'grommet'
-import { Grommet as GrommetIcon, Home } from 'grommet-icons'
+import { Grommet as GrommetIcon } from 'grommet-icons'
 
 // => Themes \\
 import { grommet, dark } from 'grommet/themes'
@@ -24,8 +21,11 @@ import { NavBar } from './components'
 import Routes from './Routes'
 
 function App() {
-    const [userState, userDispatch, login, getUserData, editUserBio] = useUser()
+    const [ userState, userDispatch, login, getUserData, editUserBio ] = useUser()
     const { loggedInUserId, username, bio, error, token } = userState
+
+    const themes = [grommet, dark, dxc]
+    const [ theme, setTheme ] = useState(dark)
 
     useEffect(() => {
         const storageObj = {
@@ -40,21 +40,21 @@ function App() {
     }, [loggedInUserId])
 
     return (
-        <Grommet theme={dark} full>
+        <Grommet theme={theme} full>
             <ResponsiveContext.Consumer>
                 {(size) => (
                     <>
                         <NavBar/>
                         <Main>
-                            <Box fill align='center' justify='center'>
+                            <Box fill align='center' justify='center' pad="large">
                                 <Routes
                                     login={login}
                                 />
                             </Box>
                         </Main>
-                        <Footer background='light-4' pad='small' margin='small'>
+                        <Footer background='brand' pad='small' >
                             <Box align='center' direction='row' gap='xsmall'>
-                                <GrommetIcon color='brand' size='medium' />
+                                <GrommetIcon color='accent-2' size='medium' />
                                 <Text
                                     alignSelf='center'
                                     color='brand'

@@ -11,7 +11,7 @@ const Home = () => {
     };
 
     return (
-        <Box align="center" pad="medium">
+        <Box align="center" pad="medium" >
             <Button label="Log In" onClick={ handleLogin } />
         </Box>
     );

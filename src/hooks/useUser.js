@@ -5,10 +5,11 @@ const userReducer = (state, {type, payload}) => {
 
     switch (type) {
         case 'LOGIN':
-            const {token, user_id} = payload
-            localStorage.setItem('loggedInUserId', user_id)
+            console.log('LOGIN hit', payload)
+            const {token, user} = payload
+            localStorage.setItem('loggedInUserId', user.id)
             localStorage.setItem('token', token)
-            return {...state, token, loggedInUserId: user_id, error: null}
+            return {...state, token, loggedInUserId: user.id, error: null}
         case 'LOGOUT':
             localStorage.clear()
             return {loggedInUserId: null, token: null, username: null, email: null}
@@ -37,6 +38,7 @@ const useUser = () => {
     }
 
     const login = (userObj) => {
+        console.log('hit login')
         fetch(`${API}/login`, {
             method: "POST",
             headers: {
@@ -47,9 +49,10 @@ const useUser = () => {
         .then(res => res.json())
         .then(authObj => {
             if (authObj.errors) {
-                console.log(authObj)
+                console.log(authObj, "hit errors")
                 dispatch({type: "ERROR", payload: authObj})
             } else {
+                console.log(authObj, 'no errors')
                 window.history.pushState({urlPath:'/'}, "Home", "/")
                 dispatch({type: "LOGIN", payload: authObj})
             }

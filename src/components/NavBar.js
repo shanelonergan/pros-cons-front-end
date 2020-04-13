@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom';
-import { Header, Button, Menu } from 'grommet'
+import { Header, Button, Select } from 'grommet'
 import { Home } from 'grommet-icons'
 
 const NavBar = () => {
     let history = useHistory()
+    const [themeName, setThemeName] = useState("grommet");
 
     const handleHome = () => {
         history.push('/')
@@ -12,7 +13,23 @@ const NavBar = () => {
     return (
         <Header background='brand'>
             <Button icon={<Home />} hoverIndicator onClick={handleHome} />
-            <Menu label='account' items={[{ label: 'logout' }]} />
+            <Select
+              plain
+              size="small"
+              options={[
+                "grommet",
+                "dark",
+                "hpe",
+                "hpeV0",
+                "aruba",
+                "hp",
+                "dxc",
+                "v1"
+              ]}
+              value={themeName}
+              onChange={event => setThemeName(event.option)}
+              width='5vw'
+            />
         </Header>
     )
 }
