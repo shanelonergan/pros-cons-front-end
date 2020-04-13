@@ -24,7 +24,6 @@ function App() {
 
 	const themesObj = {grommet, dark, hpe, aruba, hp,dxc, v1}
 	const [theme, setTheme] = useState(dark)
-    console.log(setTheme)
 
 	useEffect(() => {
 		const storageObj = {

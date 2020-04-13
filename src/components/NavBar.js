@@ -14,7 +14,6 @@ const NavBar = ({ themesObj, setTheme, theme }) => {
 	}
 
 	useEffect(() => {
-		// console.log('themesObj:', themesObj)
 		setTheme(themesObj[themeName])
 	}, [themeName])
 

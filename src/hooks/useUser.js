@@ -25,6 +25,7 @@ const userReducer = (state, {type, payload}) => {
         }
         case "ERROR":
             const {errors} = payload
+            alert('User not found')
             return {...state, error: errors[0]}
         default:
             throw new Error("Undefined User Dispatch Action")
