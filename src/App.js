@@ -47,6 +47,7 @@ function App() {
 							<NavBar
                                 themesObj={themesObj}
                                 setTheme={setTheme}
+                                theme={theme}
                             />
 							<Main>
 								<Box fill align='center' justify='center' pad='large'>
