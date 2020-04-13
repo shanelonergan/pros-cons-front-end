@@ -1,22 +1,22 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { Box, Button, Grommet, Text } from "grommet";
 import { Redirect } from 'react-router-dom'
 import { useHistory } from 'react-router-dom';
 import useUser from '../hooks/useUser'
+import { UserContext } from "../UserContext";
 
 const Home = (loggedInUserId) => {
-    const [ userState, userDispatch, login, getUserData] = useUser()
-    const { username, email, error, token } = userState
     let history = useHistory();
+    const user = useContext(UserContext)
 
     const handleLogin = () => {
         history.push('/login');
     };
 
     const renderUser = () => {
-        console.log(username)
+        console.log(user.username)
         return (
-            `Welcome, ${username}`
+            `Welcome, ${user.username}`
         )
     }
 
