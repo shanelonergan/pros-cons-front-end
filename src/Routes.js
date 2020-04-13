@@ -2,21 +2,34 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom'
 import { Home, Login, SignUp } from './components'
 
-const renderLogin = (login) => {
+const renderLogin = (login, loggedInUserId) => {
+    if(loggedInUserId) {
+        return (<Home/>)
+    } else {
+        return (
+            <Login
+                login={ login }
+            />
+        )
+    }
+}
+
+const renderHome = (loggedInUserId, username ) => {
     return (
-        <Login
-            login={ login }
+        <Home
+            loggedInUserId={loggedInUserId}
+            username = {username}
         />
     )
 }
 
-const Routes = ({ login }) => {
+const Routes = ({ login, loggedInUserId, username }) => {
 
     return (
         <Switch>
             <Route path="/signup" component={ SignUp } />
-            <Route path="/login" render={() => renderLogin(login) } />
-            <Route exact path="/" component={ Home } />
+            <Route path="/login" render={ () => renderLogin(login, loggedInUserId) } />
+            <Route exact path="/" component={ () => renderHome(loggedInUserId, username) } />
         </Switch>
     );
 }

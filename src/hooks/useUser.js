@@ -53,7 +53,6 @@ const useUser = () => {
                 dispatch({type: "ERROR", payload: authObj})
             } else {
                 console.log(authObj, 'no errors')
-                window.history.pushState({urlPath:'/'}, "Home", "/")
                 dispatch({type: "LOGIN", payload: authObj})
             }
         })

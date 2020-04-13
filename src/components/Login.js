@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useHistory } from 'react-router-dom';
 import {
     Box,
     Button,
@@ -10,6 +11,10 @@ import {
 } from 'grommet'
 
 const Login = ({ login }) => {
+    // let history = useHistory()
+
+    // loggedInUserId ? history.push('/') : null
+
     const [input, setInput] = useState()
 
     const handleSubmit = (event) => {
