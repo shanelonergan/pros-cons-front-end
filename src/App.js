@@ -21,14 +21,13 @@ import { NavBar } from './components'
 import Routes from './Routes'
 
 function App() {
-    const [ userState, userDispatch, login, getUserData, editUserBio ] = useUser()
+    const [ userState, userDispatch, login, getUserData] = useUser()
     const { loggedInUserId, username, email, error, token } = userState
 
     const themes = [grommet, dark, dxc]
     const [ theme, setTheme ] = useState(dark)
 
     useEffect(() => {
-        console.log(userState)
         const storageObj = {
             user_id: localStorage.getItem('loggedInUserId'),
             token: localStorage.getItem('token'),

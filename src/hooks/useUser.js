@@ -16,6 +16,7 @@ const userReducer = (state, {type, payload}) => {
         case "SET":
             return {...state, token: payload.token, loggedInUserId: payload.user_id}
         case "GET":
+            console.log('GET hit', payload)
             const {username, email} = payload
             return {...state, username, email}
         case "EDIT": {
@@ -34,7 +35,8 @@ const useUser = () => {
     const initialState = {
         loggedInUserId: null,
         token: "",
-        prompt: {}
+        username: "",
+        email: ""
     }
 
     const login = (userObj) => {

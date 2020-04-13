@@ -2,8 +2,11 @@ import React from 'react';
 import { Box, Button, Grommet, Text } from "grommet";
 import { Redirect } from 'react-router-dom'
 import { useHistory } from 'react-router-dom';
+import useUser from '../hooks/useUser'
 
-const Home = (loggedInUserId, username) => {
+const Home = (loggedInUserId) => {
+    const [ userState, userDispatch, login, getUserData] = useUser()
+    const { username, email, error, token } = userState
     let history = useHistory();
 
     const handleLogin = () => {
@@ -13,9 +16,7 @@ const Home = (loggedInUserId, username) => {
     const renderUser = () => {
         console.log(username)
         return (
-            <Text>
-                `Welcome,
-            </Text>
+            `Welcome, ${username}`
         )
     }
 
