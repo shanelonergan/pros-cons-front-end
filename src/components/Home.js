@@ -4,9 +4,10 @@ import { Redirect } from 'react-router-dom'
 import { useHistory } from 'react-router-dom';
 import { UserContext } from "../UserContext";
 
-const Home = (loggedInUserId) => {
+const Home = () => {
     let history = useHistory();
     const [ userState, userDispatch ] = useContext(UserContext)
+    const { username, loggedInUserId } = userState
 
     const handleLogin = () => {
         history.push('/login');
@@ -17,11 +18,10 @@ const Home = (loggedInUserId) => {
     }
 
     const renderUser = () => {
-        console.log(handleLogout)
         return (
             <>
             <Text>
-                Welcome, {userState.username}
+                Welcome, {username}
             </Text>
             <Button label="Log Out" onClick={ handleLogout }/>
             </>

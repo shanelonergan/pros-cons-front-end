@@ -47,6 +47,7 @@ function App() {
                                 themesObj={themesObj}
                                 setTheme={setTheme}
                                 theme={theme}
+                                size={size}
                             />
 							<Main>
 								<Box fill align='center' justify='center' pad='large'>

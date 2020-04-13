@@ -4,7 +4,7 @@ import { Header, Button, Select, Menu } from 'grommet'
 import { Home } from 'grommet-icons'
 import { Actions, Cloud } from 'grommet-icons'
 
-const NavBar = ({ themesObj, setTheme, theme }) => {
+const NavBar = ({ themesObj, setTheme, theme, size }) => {
 	let history = useHistory()
 	const [themeString, setThemeString] = useState('light')
   const [themeName, setThemeName] = useState('grommet')
@@ -24,15 +24,18 @@ const NavBar = ({ themesObj, setTheme, theme }) => {
 
 	return (
 		<Header background='brand'>
-			<Button icon={<Home />} hoverIndicator onClick={handleHome} />
-			<Select
-				plain
-				size='small'
-				options={['grommet', 'dark', 'hpe', 'aruba', 'hp', 'dxc', 'v1']}
-				value={themeName}
-				onChange={(event) => setThemeName(event.option)}
-        margin='xsmall'
-			/>
+      <Button icon={<Home />} hoverIndicator onClick={handleHome} />
+      {size === 'large' ?
+        <Select
+          plain
+          size='small'
+          options={['grommet', 'dark', 'hpe', 'aruba', 'hp', 'dxc', 'v1']}
+          value={themeName}
+          onChange={(event) => setThemeName(event.option)}
+          margin='xsmall'
+        />
+        : null
+      }
 			<Menu
 				label='Theme'
 				items={[
