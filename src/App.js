@@ -38,11 +38,13 @@ function App() {
 			<ResponsiveContext.Consumer>
 				{(size) => (
 					<>
-						<UserContext.Provider value={userState}>
+						<UserContext.Provider value={[userState, userDispatch]}>
 							<NavBar />
 							<Main>
 								<Box fill align='center' justify='center' pad='large'>
-									<Routes login={login} loggedInUserId={loggedInUserId} username={username} />
+									<Routes
+                                        login={login}
+                                    />
 								</Box>
 							</Main>
 							<Footer background='brand' pad='small'>

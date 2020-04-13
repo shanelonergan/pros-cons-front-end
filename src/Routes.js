@@ -1,25 +1,23 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Switch, Route } from 'react-router-dom'
 import { Home, Login, SignUp } from './components'
+import { UserContext } from "./UserContext";
 
-const renderLogin = (login, loggedInUserId) => {
-	if (loggedInUserId) {
+const renderLogin = (login, userState) => {
+	if (userState.loggedInUserId) {
 		return <Home />
 	} else {
 		return <Login login={login} />
 	}
 }
 
-const renderHome = (loggedInUserId, username) => {
-	return <Home loggedInUserId={loggedInUserId} username={username} />
-}
-
-const Routes = ({ login, loggedInUserId, username }) => {
+const Routes = ({ login }) => {
+    const [ userState ] = useContext(UserContext)
 	return (
 		<Switch>
 			<Route path='/signup' component={SignUp} />
-			<Route path='/login' render={() => renderLogin(login, loggedInUserId)} />
-			<Route exact path='/' component={() => renderHome(loggedInUserId, username)} />
+			<Route path='/login' render={() => renderLogin(login, userState)} />
+			<Route exact path='/' component={ Home } />
 		</Switch>
 	)
 }

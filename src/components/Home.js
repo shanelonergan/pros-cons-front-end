@@ -2,21 +2,29 @@ import React, {useContext} from 'react';
 import { Box, Button, Grommet, Text } from "grommet";
 import { Redirect } from 'react-router-dom'
 import { useHistory } from 'react-router-dom';
-import useUser from '../hooks/useUser'
 import { UserContext } from "../UserContext";
 
 const Home = (loggedInUserId) => {
     let history = useHistory();
-    const user = useContext(UserContext)
+    const [ userState, userDispatch ] = useContext(UserContext)
 
     const handleLogin = () => {
         history.push('/login');
     };
 
+    const handleLogout = () => {
+        userDispatch({type: 'LOGOUT'})
+    }
+
     const renderUser = () => {
-        console.log(user.username)
+        console.log(handleLogout)
         return (
-            `Welcome, ${user.username}`
+            <>
+            <Text>
+                Welcome, {userState.username}
+            </Text>
+            <Button label="Log Out" onClick={ handleLogout }/>
+            </>
         )
     }
 
