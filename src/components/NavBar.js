@@ -1,15 +1,21 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom';
 import { Header, Button, Select } from 'grommet'
 import { Home } from 'grommet-icons'
 
-const NavBar = () => {
+const NavBar = ({themesObj, setTheme}) => {
     let history = useHistory()
     const [themeName, setThemeName] = useState("grommet");
 
     const handleHome = () => {
         history.push('/')
     }
+
+    useEffect(() => {
+      // console.log('themesObj:', themesObj)
+      setTheme(themesObj[themeName])
+    }, [themeName]);
+
     return (
         <Header background='brand'>
             <Button icon={<Home />} hoverIndicator onClick={handleHome} />
@@ -20,7 +26,6 @@ const NavBar = () => {
                 "grommet",
                 "dark",
                 "hpe",
-                "hpeV0",
                 "aruba",
                 "hp",
                 "dxc",

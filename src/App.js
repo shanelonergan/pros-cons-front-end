@@ -8,7 +8,11 @@ import { Grommet as GrommetIcon } from 'grommet-icons'
 
 // => Themes \\
 import { grommet, dark } from 'grommet/themes'
-import { dxc } from 'grommet-theme-dxc'
+import { hpe } from "grommet-theme-hpe";
+import { aruba } from "grommet-theme-aruba";
+import { hp } from "grommet-theme-hp";
+import { dxc } from "grommet-theme-dxc";
+import { v1 } from "grommet-theme-v1";
 
 // => Components \\
 import { NavBar } from './components'
@@ -18,8 +22,9 @@ function App() {
 	const [userState, userDispatch, login, getUserData] = useUser()
 	const { loggedInUserId, username, email, error, token } = userState
 
-	const themes = [grommet, dark, dxc]
+	const themesObj = {grommet, dark, hpe, aruba, hp,dxc, v1}
 	const [theme, setTheme] = useState(dark)
+    console.log(setTheme)
 
 	useEffect(() => {
 		const storageObj = {
@@ -39,7 +44,10 @@ function App() {
 				{(size) => (
 					<>
 						<UserContext.Provider value={[userState, userDispatch]}>
-							<NavBar />
+							<NavBar
+                                themesObj={themesObj}
+                                setTheme={setTheme}
+                            />
 							<Main>
 								<Box fill align='center' justify='center' pad='large'>
 									<Routes
