@@ -23,7 +23,11 @@ const Home = () => {
             <Text>
                 Welcome, {username}
             </Text>
-            <Button label="Log Out" onClick={ handleLogout }/>
+            <Button
+                label="Log Out"
+                onClick={ handleLogout }
+                margin='medium'
+            />
             </>
         )
     }
