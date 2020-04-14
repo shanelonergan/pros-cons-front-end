@@ -13,6 +13,10 @@ const NavBar = ({ themesObj, setTheme, theme, size }) => {
 		history.push('/')
 	}
 
+	const handleLists = () => {
+		history.push('/lists')
+	}
+
 	useEffect(() => {
 		setTheme(themesObj[themeName])
 	}, [themeName])
@@ -41,7 +45,7 @@ const NavBar = ({ themesObj, setTheme, theme, size }) => {
 					items={[
 						{
 							label: <Box alignSelf='center'>My Lists</Box>,
-							onClick: () => {},
+							onClick: handleLists,
 							icon: (
 								<Box margin='medium'>
 									<List />
