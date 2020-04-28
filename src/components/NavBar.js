@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom'
 import { UserContext } from "../UserContext";
 
 import { Header, Button, Select, Menu, Box } from 'grommet'
-import { Actions, Cloud, List, Add, Logout, Home } from 'grommet-icons'
+import { Actions, Cloud, List, Add, Logout, Login, Home } from 'grommet-icons'
 import useUser from '../hooks/useUser'
 
 const NavBar = ({ themesObj, setTheme, theme, size }) => {
@@ -79,7 +79,7 @@ const NavBar = ({ themesObj, setTheme, theme, size }) => {
 					]}
 				/> )
 				:
-				<Button label="Log In" onClick={ () => history.push('/login') } />
+				<Button label="Log In" onClick={ () => history.push('/login') } icon={<Login/>} reverse/>
 				}
 				<Menu
 					label='Theme'
