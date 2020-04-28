@@ -1,5 +1,8 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { useHistory } from 'react-router-dom'
+
+import { UserContext } from "../UserContext";
+
 import { Header, Button, Select, Menu, Box } from 'grommet'
 import { Home } from 'grommet-icons'
 import { Actions, Cloud, List, Add } from 'grommet-icons'
@@ -8,6 +11,7 @@ const NavBar = ({ themesObj, setTheme, theme, size }) => {
 	let history = useHistory()
 	const [themeString, setThemeString] = useState('light')
 	const [themeName, setThemeName] = useState('grommet')
+	const [ userState ] = useContext(UserContext)
 
 	const handleHome = () => {
 		history.push('/')
@@ -39,9 +43,10 @@ const NavBar = ({ themesObj, setTheme, theme, size }) => {
 					margin='xsmall'
 				/>
 			) : null}
-			<Box direction='row' pad='medium'>
+				<Box direction='row' pad='medium'>
+				{ userState.username ? (
 				<Menu
-					label='Shane'
+					label={userState.username}
 					items={[
 						{
 							label: <Box alignSelf='center'>My Lists</Box>,
@@ -62,7 +67,10 @@ const NavBar = ({ themesObj, setTheme, theme, size }) => {
 							),
 						},
 					]}
-				/>
+				/> )
+				:
+				<Button label="Log In" onClick={ () => history.push('/login') } />
+				}
 				<Menu
 					label='Theme'
 					items={[
