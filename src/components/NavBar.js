@@ -4,14 +4,15 @@ import { useHistory } from 'react-router-dom'
 import { UserContext } from "../UserContext";
 
 import { Header, Button, Select, Menu, Box } from 'grommet'
-import { Home } from 'grommet-icons'
-import { Actions, Cloud, List, Add } from 'grommet-icons'
+import { Actions, Cloud, List, Add, Logout, Home } from 'grommet-icons'
+import useUser from '../hooks/useUser'
 
 const NavBar = ({ themesObj, setTheme, theme, size }) => {
 	let history = useHistory()
 	const [themeString, setThemeString] = useState('light')
 	const [themeName, setThemeName] = useState('grommet')
-	const [ userState ] = useContext(UserContext)
+	const [ userState, userDispatch ] = useContext(UserContext)
+    const { username, loggedInUserId } = userState
 
 	const handleHome = () => {
 		history.push('/')
@@ -66,6 +67,15 @@ const NavBar = ({ themesObj, setTheme, theme, size }) => {
 								</Box>
 							),
 						},
+						{
+							label: <Box alignSelf='center'>Log Out</Box>,
+							onClick: () => {userDispatch({type: 'LOGOUT'})},
+							icon: (
+								<Box margin='medium'>
+									<Logout />
+								</Box>
+							),
+						}
 					]}
 				/> )
 				:
