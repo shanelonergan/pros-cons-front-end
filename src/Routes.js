@@ -11,10 +11,19 @@ const renderLogin = (login, userState) => {
 	}
 }
 
+const renderNewList = (login, userState) => {
+	if (userState.loggedInUserId) {
+		return <NewListContainer />
+	} else {
+		return <LoginNotice />
+	}
+}
+
 const Routes = ({ login }) => {
     const [ userState ] = useContext(UserContext)
 	return (
 		<Switch>
+			<Route path='/lists/new' component={NewListContainer}/>
 			<Route path='/lists' component={ListsContainer}/>
 			<Route path='/signup' component={SignUp} />
 			<Route path='/login' render={() => renderLogin(login, userState)} />
