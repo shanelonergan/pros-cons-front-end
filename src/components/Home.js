@@ -13,22 +13,11 @@ const Home = () => {
         history.push('/login');
     };
 
-    const handleLogout = () => {
-        userDispatch({type: 'LOGOUT'})
-    }
-
     const renderUser = () => {
         return (
-            <>
             <Text>
                 Welcome, {username}
             </Text>
-            <Button
-                label="Log Out"
-                onClick={ handleLogout }
-                margin='medium'
-            />
-            </>
         )
     }
 

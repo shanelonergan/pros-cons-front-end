@@ -60,7 +60,7 @@ const NavBar = ({ themesObj, setTheme, theme, size }) => {
 						},
 						{
 							label: <Box alignSelf='center'>New List</Box>,
-							onClick: () => {},
+							onClick: () => {history.push('/lists/new')},
 							icon: (
 								<Box margin='medium'>
 									<Add />
