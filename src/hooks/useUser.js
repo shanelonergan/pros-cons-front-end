@@ -25,7 +25,7 @@ const userReducer = (state, {type, payload}) => {
         }
         case "ERROR":
             const {errors} = payload
-            alert('User not found')
+            alert(payload.errors.join(' \n'))
             return {...state, error: errors[0]}
         default:
             throw new Error("Undefined User Dispatch Action")
@@ -61,6 +61,26 @@ const useUser = () => {
         })
     }
 
+    const signUp = (userObj) => {
+        fetch(`${API}/users`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(userObj)
+        })
+        .then(res => res.json())
+        .then(authObj => {
+            if (authObj.errors) {
+                console.log(authObj, 'Hit errors')
+                dispatch({type: "ERROR", payload: authObj})
+            } else {
+                console.log(authObj, 'no errors')
+                dispatch({type: "LOGIN", payload: authObj})
+            }
+        })
+    }
+
     const getUserData = (userId, token) => {
         if (userId) {
         fetch(`${API}/users/${userId}`, {
@@ -76,7 +96,7 @@ const useUser = () => {
 
     const [state, dispatch] = useReducer(userReducer, initialState)
 
-    return [state, dispatch, login, getUserData]
+    return [state, dispatch, login, signUp, getUserData]
 }
 
 export default useUser

@@ -4,14 +4,14 @@ import { Box, Button, Grommet, Form, FormField, MaskedInput, TextInput } from 'g
 import { User, View, Hide } from 'grommet-icons'
 
 const Login = ({ login }) => {
-	// let history = useHistory()
+	let history = useHistory()
 
 	// loggedInUserId ? history.push('/') : null
 
 	const [input, setInput] = useState()
 	const [reveal, setReveal] = useState(false)
 
-	const handleSubmit = (event) => {
+	const handleLogin = (event) => {
 		console.log(input, 'Submit')
 		event.preventDefault()
 		login(input)
@@ -26,7 +26,7 @@ const Login = ({ login }) => {
 					onReset={() => setInput({})}
 					onSubmit={(event) => {
 						// console.log('Submit', event.value)
-						handleSubmit(event)
+						handleLogin(event)
 					}}
 				>
 					<FormField label='Username' name='username'>
@@ -49,7 +49,7 @@ const Login = ({ login }) => {
 					</FormField>
 
 					<Box direction='row' justify='between' margin={{ top: 'medium' }}>
-						<Button label='Sign Up' />
+						<Button label='Sign Up' onClick={() => history.push('/signup')}/>
 						<Button type='submit' label='Log In' primary />
 					</Box>
 				</Form>

@@ -4,11 +4,11 @@ import { Home, Login, SignUp, ListsContainer, LoginNotice, NewListContainer } fr
 import { UserContext } from "./UserContext";
 
 const renderLogin = (login, userState) => {
-	if (userState.loggedInUserId) {
-		return <Home />
-	} else {
 		return <Login login={login} />
-	}
+}
+
+const renderSignUp = (userState, signUp) => {
+	return <SignUp userState={userState} signUp={signUp} />
 }
 
 const renderNewList = (login, userState) => {
@@ -19,13 +19,13 @@ const renderNewList = (login, userState) => {
 	}
 }
 
-const Routes = ({ login }) => {
+const Routes = ({ login, signUp }) => {
     const [ userState ] = useContext(UserContext)
 	return (
 		<Switch>
 			<Route path='/lists/new' render={() => renderNewList(login, userState)}/>
 			<Route path='/lists' component={ListsContainer}/>
-			<Route path='/signup' component={SignUp} />
+			<Route path='/signup' render={() => renderSignUp(userState, signUp)} />
 			<Route path='/login' render={() => renderLogin(login, userState)} />
 			<Route exact path='/' component={ Home } />
 		</Switch>

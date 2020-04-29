@@ -19,8 +19,9 @@ import { NavBar } from './components'
 import Routes from './Routes'
 
 function App() {
-	const [userState, userDispatch, login, getUserData] = useUser()
+	const [userState, userDispatch, login, signUp, getUserData] = useUser()
 	const { loggedInUserId, username, email, error, token } = userState
+	console.log(userState)
 
 	const themesObj = {grommet, dark, hpe, aruba, hp,dxc, v1}
 	const [theme, setTheme] = useState(dark)
@@ -53,6 +54,7 @@ function App() {
 								<Box fill align='center' justify='center' pad='large'>
 									<Routes
                                         login={login}
+										signUp={signUp}
                                     />
 								</Box>
 							</Main>
