@@ -1,12 +1,14 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { useHistory } from 'react-router-dom'
 import { Box, Button, Grommet, Form, FormField, MaskedInput, TextInput } from 'grommet'
 import { User, View, Hide } from 'grommet-icons'
+import { UserContext } from "../UserContext";
 
 const Login = ({ login }) => {
 	let history = useHistory()
+	const [ userState ] = useContext(UserContext)
 
-	// loggedInUserId ? history.push('/') : null
+	if (userState.username) history.push('/')
 
 	const [input, setInput] = useState()
 	const [reveal, setReveal] = useState(false)

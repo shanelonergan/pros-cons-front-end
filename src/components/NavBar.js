@@ -34,7 +34,7 @@ const NavBar = ({ themesObj, setTheme, theme, size }) => {
 	return (
 		<Header background='brand'>
 			<Button icon={<Home />} hoverIndicator onClick={handleHome} />
-			{size === 'large' ? (
+			{/* {size === 'large' ? (
 				<Select
 					plain
 					size='small'
@@ -43,7 +43,7 @@ const NavBar = ({ themesObj, setTheme, theme, size }) => {
 					onChange={(event) => setThemeName(event.option)}
 					margin='xsmall'
 				/>
-			) : null}
+			) : null} */}
 				<Box direction='row' pad='medium'>
 				{ userState.username ? (
 				<Menu
