@@ -1,13 +1,20 @@
 import React, { useState } from 'react'
 import { Box, FormField, TextInput, TextArea, Text, Button } from 'grommet'
-import { Edit, Add } from 'grommet-icons'
+import { Edit, Add, Like, Dislike } from 'grommet-icons'
 
 export default function NewListContainer() {
 	const [name, setName] = useState('')
 	const [proForm, setProForm] = useState('')
 	const [conForm, setConForm] = useState('')
 
-	const handleName = (event) => setName(event.target.value)
+	const renderListItem = (itemText) => {
+		return (
+			<Box direction='row' align='center'>
+				<Like />
+				<Text>{itemText}</Text>
+			</Box>
+		)
+	}
 
 	return (
 		<Box fill align='center'>
