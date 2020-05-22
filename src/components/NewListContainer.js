@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Box, FormField, TextInput, TextArea, Text, Button } from 'grommet'
+import { Box, FormField, TextInput, Form, Text, Button } from 'grommet'
 import { Edit, Add, Like, Dislike } from 'grommet-icons'
 
 export default function NewListContainer() {
@@ -19,8 +19,13 @@ export default function NewListContainer() {
 	// }
 
 	const renderProsList = () => {
-		const prosArr = prosList.map(pro => {
-			return <Text>{pro}</Text>
+		const prosArr = prosList.map((pro) => {
+			return (
+				<Box direction='row' align='center' pad='medium'>
+					<Like />
+					<Text size='medium' margin='small'>{pro}</Text>
+				</Box>
+			)
 		})
 
 		return prosArr
@@ -32,7 +37,7 @@ export default function NewListContainer() {
 
 	return (
 		<Box fill align='center'>
-			<Box width='large' align='center' >
+			<Box width='large' align='center'>
 				<Box width='medium'>
 					<FormField>
 						<TextInput
@@ -47,21 +52,22 @@ export default function NewListContainer() {
 						<Text size='large' margin='small'>
 							pros
 						</Text>
-						{prosList !== []
-							? renderProsList()
-							: null
-						}
-						<Box direction='row' align='center'>
-							<Button icon={<Add color='brand' />}
-							onClick={(event) => {
-								setProsList([...prosList, proForm])}}
-							/>
-							<TextInput
-								placeholder='Add a pro'
-								value={proForm}
-								onChange={(event) => setProForm(event.target.value)}
-							/>
-						</Box>
+						{prosList !== [] ? renderProsList() : null}
+						<Form
+							direction='row'
+							onSubmit={(event) => {
+								setProsList([...prosList, proForm])
+							}}
+						>
+							<Box direction='row' align='center'>
+								<Button icon={<Add color='brand' />} type='submit' />
+								<TextInput
+									placeholder='Add a pro'
+									value={proForm}
+									onChange={(event) => setProForm(event.target.value)}
+								/>
+							</Box>
+						</Form>
 					</Box>
 					<Box>
 						<Text size='large' margin='small'>
