@@ -18,8 +18,8 @@ export default function NewListContainer() {
 
 	return (
 		<Box fill align='center'>
-			<Box width='medium'>
-				<Box>
+			<Box width='large' align='center' >
+				<Box width='medium'>
 					<FormField>
 						<TextInput
 							placeholder='New List'
@@ -28,7 +28,7 @@ export default function NewListContainer() {
 						/>
 					</FormField>
 				</Box>
-				<Box direction='row-responsive' justify='center' pad='medium'>
+				<Box direction='row-responsive' justify='center' pad='medium' gap='small'>
 					<Box>
 						<Text size='large' margin='small'>
 							pros
