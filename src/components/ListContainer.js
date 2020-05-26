@@ -1,12 +1,12 @@
 import React, { useState, useContext, useEffect } from 'react'
 import { UserContext } from '../UserContext'
 import { Box, FormField, TextInput, Form, Text, Button } from 'grommet'
-import { Edit, Add, Like, Dislike } from 'grommet-icons'
+import { Edit, Add, Like, Dislike, CloudUpload } from 'grommet-icons'
 // import { ResizeSpinLoader } from 'react-css-loaders'
 import API from '../config/API'
 
 export default function NewListContainer() {
-	const [listName, setListName] = useState('')
+	const [listName, setListName] = useState(null)
 	const [proForm, setProForm] = useState('')
 	const [conForm, setConForm] = useState('')
 	const [prosList, setProsList] = useState([])
@@ -19,7 +19,7 @@ export default function NewListContainer() {
 	useEffect(() => {
 		const urlArr = window.location.href.split('/')
 		const listId = urlArr[4]
-		fetch(API + '/lists' + listId)
+		fetch(API + '/lists/' + listId)
 		.then(res => res.json())
 		.then(listObj => {
 			console.log('list:', listObj)
@@ -75,12 +75,13 @@ export default function NewListContainer() {
 							<TextInput
 								id='name-input'
 								placeholder='New List'
-								value={listName}
+								value={listName !== null ? listName : currentList.name}
 								onChange={(event) => setListName(event.target.value)}
 								plain
 							/>
+							{/* <Text>{currentList.listName}</Text> */}
 							<Button
-								icon={<Edit />}
+								icon={<CloudUpload />}
 								onClick={handleName}
 							/>
 						</Box>
