@@ -4,7 +4,7 @@ import Home from './Home';
 import NavBar from './NavBar'
 import ListsContainer from './ListsContainer'
 import LoginNotice from './LoginNotice'
-import NewListContainer from './NewListContainer'
+import ListContainer from './ListContainer'
 import NewListForm from './NewListForm'
 
 export {
@@ -14,6 +14,6 @@ export {
   NavBar,
   ListsContainer,
   LoginNotice,
-  NewListContainer,
+  ListContainer,
   NewListForm
 };

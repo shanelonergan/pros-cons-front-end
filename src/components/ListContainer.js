@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect } from 'react'
 import { UserContext } from '../UserContext'
 import { Box, FormField, TextInput, Form, Text, Button } from 'grommet'
 import { Edit, Add, Like, Dislike } from 'grommet-icons'
+// import { ResizeSpinLoader } from 'react-css-loaders'
 import API from '../config/API'
 
 export default function NewListContainer() {
@@ -12,8 +13,21 @@ export default function NewListContainer() {
 	const [constList, setConsList] = useState([])
 
 	const [userState] = useContext(UserContext)
+	const [currentList, setCurrentList] = useState(null)
+	console.log(currentList)
 
-	//user is "finished typing," do something
+	useEffect(() => {
+		const urlArr = window.location.href.split('/')
+		const listId = urlArr[4]
+		fetch(API + '/lists' + listId)
+		.then(res => res.json())
+		.then(listObj => {
+			console.log('list:', listObj)
+			setCurrentList(listObj)
+		})
+	}, [])
+
+
 	function handleName() {
 		const userId = +userState.loggedInUserId
 		const data = { name: listName, user_id: userId }
@@ -51,7 +65,9 @@ export default function NewListContainer() {
 	}
 
 	return (
+		<>
 		<Box fill align='center'>
+			{ currentList ? (
 			<Box width='large' align='center'>
 				<Box width='medium'>
 					<FormField>
@@ -106,7 +122,13 @@ export default function NewListContainer() {
 						</Box>
 					</Box>
 				</Box>
-			</Box>
+			</Box>)
+			: (
+				<Box justify='center' align='center' height='100vh'>
+					Loading...
+				</Box>
+			)}
 		</Box>
+		</>
 	)
 }
