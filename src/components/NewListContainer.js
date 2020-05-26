@@ -1,29 +1,44 @@
-import React, { useState } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
+import { UserContext } from '../UserContext'
 import { Box, FormField, TextInput, Form, Text, Button } from 'grommet'
 import { Edit, Add, Like, Dislike } from 'grommet-icons'
+import API from '../config/API'
 
 export default function NewListContainer() {
-	const [name, setName] = useState('')
+	const [listName, setListName] = useState('')
 	const [proForm, setProForm] = useState('')
 	const [conForm, setConForm] = useState('')
 	const [prosList, setProsList] = useState([])
 	const [constList, setConsList] = useState([])
 
-	// const renderListItem = (itemText) => {
-	// 	return (
-	// 		<Box direction='row' align='center'>
-	// 			<Like />
-	// 			<Text>{itemText}</Text>
-	// 		</Box>
-	// 	)
-	// }
+	const [userState] = useContext(UserContext)
+
+	//user is "finished typing," do something
+	function handleName() {
+		const userId = +userState.loggedInUserId
+		const data = { name: listName, user_id: userId }
+		console.log('data:', data)
+		const config = {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(data),
+		}
+
+		fetch(API + '/lists', config)
+		.then(res => res.json())
+		.then(console.log)
+	}
 
 	const renderProsList = () => {
 		const prosArr = prosList.map((pro) => {
 			return (
 				<Box direction='row' align='center' pad='medium'>
 					<Like />
-					<Text size='medium' margin='small'>{pro}</Text>
+					<Text size='medium' margin='small'>
+						{pro}
+					</Text>
 				</Box>
 			)
 		})
@@ -40,11 +55,19 @@ export default function NewListContainer() {
 			<Box width='large' align='center'>
 				<Box width='medium'>
 					<FormField>
-						<TextInput
-							placeholder='New List'
-							value={name}
-							onChange={(event) => setName(event.target.value)}
-						/>
+						<Box direction='row'>
+							<TextInput
+								id='name-input'
+								placeholder='New List'
+								value={listName}
+								onChange={(event) => setListName(event.target.value)}
+								plain
+							/>
+							<Button
+								icon={<Edit />}
+								onClick={handleName}
+							/>
+						</Box>
 					</FormField>
 				</Box>
 				<Box direction='row-responsive' justify='center' pad='medium' gap='small'>
