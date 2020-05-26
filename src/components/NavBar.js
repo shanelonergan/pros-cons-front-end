@@ -3,24 +3,23 @@ import { useHistory } from 'react-router-dom'
 
 import { UserContext } from "../UserContext";
 
-import { Header, Button, Select, Menu, Box } from 'grommet'
+import { Header, Button, Menu, Box, Layer } from 'grommet'
 import { Actions, Cloud, List, Add, Logout, Login, Home } from 'grommet-icons'
 import useUser from '../hooks/useUser'
 
-const NavBar = ({ themesObj, setTheme, theme, size }) => {
+const NavBar = ({ themesObj, setTheme, theme, size, showNewList, setShowNewList }) => {
 	let history = useHistory()
 	const [themeString, setThemeString] = useState('light')
 	const [themeName, setThemeName] = useState('grommet')
 	const [ userState, userDispatch ] = useContext(UserContext)
-    const { username, loggedInUserId } = userState
+	const { username, loggedInUserId } = userState
 
-	const handleHome = () => {
-		history.push('/')
-	}
+	console.log(setShowNewList)
 
-	const handleLists = () => {
-		history.push('/lists')
-	}
+	const handleHome = () => history.push('/')
+	const handleNewList = () => history.push('/lists/new')
+	const handleLists = () => history.push('/lists')
+
 
 	useEffect(() => {
 		setTheme(themesObj[themeName])
@@ -60,7 +59,7 @@ const NavBar = ({ themesObj, setTheme, theme, size }) => {
 						},
 						{
 							label: <Box alignSelf='center'>New List</Box>,
-							onClick: () => {history.push('/lists/new')},
+							onClick: () => setShowNewList(true),
 							icon: (
 								<Box margin='medium'>
 									<Add />

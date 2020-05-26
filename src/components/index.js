@@ -5,6 +5,7 @@ import NavBar from './NavBar'
 import ListsContainer from './ListsContainer'
 import LoginNotice from './LoginNotice'
 import NewListContainer from './NewListContainer'
+import NewListForm from './NewListForm'
 
 export {
   SignUp,
@@ -13,5 +14,6 @@ export {
   NavBar,
   ListsContainer,
   LoginNotice,
-  NewListContainer
+  NewListContainer,
+  NewListForm
 };

@@ -3,27 +3,28 @@ import useUser from './hooks/useUser'
 import { UserContext } from './UserContext'
 
 // => Grommet \\
-import { Grommet, Box, ResponsiveContext, Footer, Text, Main } from 'grommet'
+import { Grommet, Box, ResponsiveContext, Footer, Text, Main, Layer } from 'grommet'
 import { Grommet as GrommetIcon } from 'grommet-icons'
 
 // => Themes \\
 import { grommet, dark } from 'grommet/themes'
-import { hpe } from "grommet-theme-hpe";
-import { aruba } from "grommet-theme-aruba";
-import { hp } from "grommet-theme-hp";
-import { dxc } from "grommet-theme-dxc";
-import { v1 } from "grommet-theme-v1";
+import { hpe } from 'grommet-theme-hpe'
+import { aruba } from 'grommet-theme-aruba'
+import { hp } from 'grommet-theme-hp'
+import { dxc } from 'grommet-theme-dxc'
+import { v1 } from 'grommet-theme-v1'
 
 // => Components \\
-import { NavBar } from './components'
+import { NavBar, NewListForm } from './components'
 import Routes from './Routes'
 
 function App() {
+	const [showNewList, setShowNewList] = useState(false)
 	const [userState, userDispatch, login, signUp, getUserData] = useUser()
 	const { loggedInUserId, username, email, error, token } = userState
-	console.log(userState)
+	console.log(showNewList)
 
-	const themesObj = {grommet, dark, hpe, aruba, hp,dxc, v1}
+	const themesObj = { grommet, dark, hpe, aruba, hp, dxc, v1 }
 	const [theme, setTheme] = useState(dark)
 
 	useEffect(() => {
@@ -45,17 +46,30 @@ function App() {
 					<>
 						<UserContext.Provider value={[userState, userDispatch]}>
 							<NavBar
-                                themesObj={themesObj}
-                                setTheme={setTheme}
-                                theme={theme}
-                                size={size}
-                            />
+								themesObj={themesObj}
+								setTheme={setTheme}
+								theme={theme}
+								size={size}
+								showNewList={showNewList}
+								setShowNewList={setShowNewList}
+							/>
 							<Main>
 								<Box fill align='center' justify='center' pad='large'>
-									<Routes
-                                        login={login}
-										signUp={signUp}
-                                    />
+									{showNewList && (
+										<Layer
+											position='center'
+											onEsc={() => setShowNewList(false)}
+											onClickOutside={() => setShowNewList(false)}
+											animation='fadeIn'
+											responsive={false}
+											margin='small'
+										>
+											<NewListForm
+												setShowNewList={setShowNewList}
+											/>
+										</Layer>
+									)}
+									<Routes login={login} signUp={signUp} />
 								</Box>
 							</Main>
 							<Footer background='brand' pad='small'>
